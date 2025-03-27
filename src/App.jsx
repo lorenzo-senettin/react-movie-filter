@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MovieList from "./components/MovieList";
 
 const initialMovies = [
@@ -13,6 +13,21 @@ const initialMovies = [
 function App() {
   const [movies, setMovies] = useState(initialMovies);
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState(initialMovies);
+
+  useEffect(() => {
+    let filtered = movies;
+    if (selectedGenre !== "") {
+      filtered = filtered.filter((movie) => movie.genre === selectedGenre);
+    }
+    if (searchTerm.trim() !== "") {
+      filtered = filtered.filter((movie) =>
+        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    setFilteredMovies(filtered);
+  }, [selectedGenre, searchTerm, movies]);
 
   return (
     <div className="App">
@@ -30,7 +45,16 @@ function App() {
           <option value="Azione">Azione</option>
         </select>
       </div>
-      <MovieList movies={movies} />
+      <div>
+        <label>Cerca per titolo: </label>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Inserisci il titolo..."
+        />
+      </div>
+      <MovieList movies={filteredMovies} />
     </div>
   );
 }
