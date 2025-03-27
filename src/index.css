@@ -1,4 +1,35 @@
 :root {
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  font-size: 1rem;
+}
+
+body {
+  margin: 0;
+  background-color: #242424;
+}
+
+.App {
+  padding: 2rem;
+}
+
+form {
+  margin-top: 1.5rem;
+}
+
+input,
+select,
+button {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 0.5rem 0;
+  border-bottom: 2px solid #000;
 }
